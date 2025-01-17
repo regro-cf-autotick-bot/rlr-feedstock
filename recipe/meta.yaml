@@ -7,23 +7,23 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/rlr-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/rlr-{{ version }}.tar.gz
   sha256: cf45ac6a8f4b0086f1a18f52761d16ce18b0cf1b33193d77f4fa57adc58895f7
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
   noarch: python
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
   run:
     - future >=0.14
     - numpy >=1.13.1
     - pylbfgs
-    - python >=3.6
+    - python >={{ python_min }}
 
 test:
   imports:
@@ -32,6 +32,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/dedupeio/rlr
